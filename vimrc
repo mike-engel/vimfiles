@@ -13,7 +13,7 @@ Plugin 'gmarik/Vundle.vim'
 " Plugins
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
-Plugin 'kien/ctrlp'
+Plugin 'kien/ctrlp.vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'bling/vim-airline'
 
@@ -34,11 +34,18 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
+autocmd vimenter * NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
 let g:airline_powerline_fonts=1
 let g:airline_theme='base16'
 let mapleader="," " change leader key to , from \
 nmap <silent> <leader>ev :e $MYVIMRC<CR> " some remappings to edit vimrc
 nmap <silent> <leader>sv :so $MYVIMRC<CR> " some remappings to reload vimrc
+nmap <silent> <c-k> :wincmd k<CR>
+nmap <silent> <c-j> :wincmd j<CR>
+nmap <silent> <c-h> :wincmd h<CR>
+nmap <silent> <c-l> :wincmd l<CR>
 
 set number " always show line numbers
 set tabstop=2 " a tab is two spaces
