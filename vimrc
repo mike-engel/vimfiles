@@ -1,39 +1,54 @@
 set nocompatible " Use Vim settings rather than Vi
 filetype off " required for vundle
+filetype plugin indent off
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-" call vundle#begin('~/some/path/here')
 
-" let Vundle manage Vundle, required
+" Vundle
 Plugin 'gmarik/Vundle.vim'
 
+" -----------------------------------------------------------------------------
 " Plugins
+" -----------------------------------------------------------------------------
+" GUI
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
-Plugin 'kien/ctrlp.vim'
-Plugin 'Raimondi/delimitMate'
 Plugin 'bling/vim-airline'
+Plugin 'airblade/vim-gitgutter'
+" Plugin 'zhaocai/GoldenView.Vim'
+Plugin 'terryma/vim-multiple-cursors'
+
+" General
+Plugin 'kien/ctrlp.vim'
 Plugin 'danro/rename.vim'
 Plugin 'pbrisbin/vim-mkdir'
+Plugin 'editorconfig/editorconfig-vim'
+
+" Typing
+Plugin 'Raimondi/delimitMate'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-scripts/matchit.zip'
 Plugin 'vim-scripts/tComment'
-Plugin '1995eaton/vim-better-css-completion'
-Plugin '1995eaton/vim-better-javascript-completion'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'editorconfig/editorconfig-vim'
+Plugin 'gregsexton/MatchTag'
+
+" CSS
+Plugin '1995eaton/vim-better-css-completion'
+Plugin 'hail2u/vim-css3-syntax'
+
+" JS
+Plugin '1995eaton/vim-better-javascript-completion'
+Plugin 'jelera/vim-javascript-syntax'
+
+" Go
 Plugin 'fatih/vim-go'
 Plugin 'golangtw/gocode.vim'
-Plugin 'gregsexton/MatchTag'
-Plugin 'hail2u/vim-css3-syntax'
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'zhaocai/GoldenView.Vim'
-Plugin 'terryma/vim-multiple-cursors'
+
+" Markdown
+Plugin 'plasticboy/vim-markdown.git'
 
 Bundle 'chriskempson/base16-vim'
 
@@ -41,109 +56,291 @@ Bundle 'chriskempson/base16-vim'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-" NERDTree config
-autocmd vimenter * NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" -----------------------------------------------------------------------------
+" mappings
+" -----------------------------------------------------------------------------
+let mapleader=","
 
+" some remappings to edit vimrc
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>sv :so $MYVIMRC<CR>
+
+" remap command leader to ;
+nnoremap ; :
+
+" Make j and k act normally for wrapped lines
+nnoremap j gj
+nnoremap k gk
+
+" remap % to tab key
+nnoremap <Tab> %
+vnoremap <Tab> %
+
+" remove whitespace on save
+nnoremap <leader>W :%s/\s\+$//<CR>:let @/=''<CR>
+
+" window navigation
+nnoremap <c-h> <c-w>h
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-l> <c-w>l
+
+" visual shifting
+vnoremap < <gv
+vnoremap > >gv
+
+" yank from the cursor to the end of the line
+nnoremap Y $y
+
+" allow repeat in visual mode
+vnoremap . :normal .<CR>
+
+" resize splits equally
+map <leader>= <c-W>=
+
+" easier newlines
+nmap <S-Enter> O<Esc>
+nmap <CR> o<Esc>
+
+" -----------------------------------------------------------------------------
+" colors
+" -----------------------------------------------------------------------------
+set t_Co=256
+set background=dark
+colorscheme base16-ocean
+
+" -----------------------------------------------------------------------------
+" GUI
+" -----------------------------------------------------------------------------
+" always show line numbers
+set number
+set nowrap
+set textwidth=0
+set wrapmargin=0
+
+" create new panes to the right or underneath the current one
+set splitbelow
+set splitright
+
+" ruler at bottom right of window
+set ruler
+
+" enable status line
+set laststatus=2
+set showmode
+
+" highlight current line
+set cursorline
+highlight clear SignColumn
+highlight clear LineNrlet
+
+" easier h/l movement
+set whichwrap=h,l,~,[,]
+
+" -----------------------------------------------------------------------------
+" whitespace
+" -----------------------------------------------------------------------------
+" a tab is four spaces
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+set smarttab
+set nojoinspaces
+set shiftround
+
+" autoindentins is always on
+set autoindent
+set smartindent
+
+" show matching parentheses
+set showmatch
+
+" highlight bad whitespace
+set list
+set listchars=tab:›\ ,trail:•,extends:>,nbsp:.
+
+" -----------------------------------------------------------------------------
+" searching
+" -----------------------------------------------------------------------------
+" ignore case when searching
+set ignorecase
+
+" ignore case if search pattern is all lowercase, upcase, etc
+set smartcase
+
+" insert tabs on the start of a line based on shiftwidth
+set smarttab
+
+" highlight search terms
+set nohlsearch
+
+" show search matches as you type
+set incsearch
+
+" -----------------------------------------------------------------------------
+" memory
+" -----------------------------------------------------------------------------
+" increase history levels
+set history=1000
+
+" increase undo levels
+set undolevels=1000
+
+" -----------------------------------------------------------------------------
+" tab completion
+" -----------------------------------------------------------------------------
+" command completion
+set wildmenu
+
+" full list for command completion
+set wildmode=list:full
+set wildignore=*.swp,*.bak,*.pyc,*.class
+set complete-=i
+set list listchars=tab:»·,trail:·
+
+" -----------------------------------------------------------------------------
+" scroll
+" -----------------------------------------------------------------------------
+" scrolling offset
+set scrolloff=3
+
+" easier scrolling
+set nostartofline
+
+" -----------------------------------------------------------------------------
+" misc
+" -----------------------------------------------------------------------------
+set encoding=utf-8
+set esckeys!
+set shell=zsh
+
+" lower timeout after typing leader
+set ttimeout
+set ttimeoutlen=500
+
+" match brackets
+set showmatch
+
+" os x backspace fix
+set backspace=indent,eol,start
+set modelines=0
+fixdel
+
+" backups
+set noswapfile
+set backup
+set backupdir=~/.vim/.backups
+set directory=~/.vim/.tmp
+
+" better undos
+if has('persistent_undo')
+	set undofile
+	set undodir=~/.vim/.undo
+	set undolevels=200
+	set undoreload=200
+endif
+
+" code folding
+set nofoldenable
+set foldmethod=indent
+set foldnestmax=10
+
+" -----------------------------------------------------------------------------
+" silver searcher
+" -----------------------------------------------------------------------------
+if executable('ag')
+	" Use Ag over Grep
+	set grepprg=ag\ --nogroup\ --nocolor
+
+	" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+	let g:ctrlp_user_command = 'ag %s -l --nocolor -g "'
+
+	" ag is fast enough that CtrlP doesn't need to cache
+	let g:ctrlp_use_caching = 0
+
+	" better ack shortcut
+	nnoremap <leader>f :Ag!<space>-i<space>-Q<space>
+endif
+
+" -----------------------------------------------------------------------------
+" NERDTree config
+" -----------------------------------------------------------------------------
+let NERDTreeIgnore=['\.rbc$', '\~$', '\.dSYM$', '\.DS_Store']
+let NERDTreeMinimalUI=1
+let NERDTreeDirArrows=1
+let NERDTreeChDirMode=1
+let NERDTreeMouseMode=1
+let NERDTreeShowHidden=1
+
+map <leader>n :NERDTreeToggle<CR>
+
+if has("autocmd")
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+endif
+
+if isdirectory(argv(0))
+    bd
+    autocmd vimenter * exe "cd" argv(0)
+    autocmd VimEnter * NERDTree
+endif
+
+" -----------------------------------------------------------------------------
 " airline config
+" -----------------------------------------------------------------------------
 let g:airline_powerline_fonts=1
+let g:airline_enable_branch=0
+let g:airline_enable_syntastic=0
+let g:airline#extensions#syntastic#enabled=0
 let g:airline_theme='base16'
 
+" -----------------------------------------------------------------------------
 " ultisnips config
+" -----------------------------------------------------------------------------
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
-" mappings
-let mapleader=","
-nmap <silent> <leader>ev :e $MYVIMRC<CR> " some remappings to edit vimrc
-nmap <silent> <leader>sv :so $MYVIMRC<CR> " some remappings to reload vimrc
-nnoremap ; : " remap command leader to ;
-nnoremap j gj " remap BOL command
-nnoremap k gk " remap EOL command
-nnoremap <Tab> % " remap % to tab key
-vnoremap <Tab> % " remap % to tab key
-nnoremap <leader>W :%s/\s\+$//<CR>:let @/=''<CR> " remove whitespace on save
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-
-" GoldenView.vim
-" 1. split to tiled windows
-nmap <silent> <C-L>  <Plug>GoldenViewSplit
-
-" 2. quickly switch current window with the main pane
-" and toggle back
-nmap <silent> <F8>   <Plug>GoldenViewSwitchMain
-nmap <silent> <S-F8> <Plug>GoldenViewSwitchToggle
-
-" 3. jump to next and previous window
-nmap <silent> <C-N>  <Plug>GoldenViewNext
-nmap <silent> <C-P>  <Plug>GoldenViewPrevious
-
-" colors
-set t_Co=256
-set background=dark
-colorscheme base16-ocean
-syntax on " turn on syntax highlighting
-
-" HUD
-set number " always show line numbers
-set nowrap
-set splitbelow " create new panes underneath the current one
-set splitright " create new panes to the right of the current one
-set ruler " ruler at bottom right of window
-set laststatus=2 " enable status line
-
-" whitespace
-set tabstop=4 " a tab is two spaces
-set autoindent " autoindentins is always on
-set shiftwidth=4 " indenting is always 2 spaces
-set shiftround
-set showmatch " show matching parentheses
-
-" searching
-set ignorecase " ignore case when searching
-set smartcase " ignore case if search pattern is all lowercase, upcase, etc
-set smarttab " insert tabs on the start of a line based on shiftwidth
-set nohlsearch " highlight search terms
-set incsearch " show search matches as you type
-
-" memory
-set history=1000 " increase history levels
-set undolevels=1000 " increase undo levels
-set nobackup " no vimbackups
-set noswapfile " no vim swap file
-
-" tab completion
-set wildmenu " command completion
-set wildmode=list:full " full list for command completion
-set list listchars=tab:»·,trail:·
-
-" scroll
-set scrolloff=3
-
-" misc
-set backspace=indent,eol,start " enable backspace while in insert mode
-set encoding=utf-8
-set esckeys!
-set backupdir=~/.vim/backups,.
-set directory=~/.vim/swaps,.
-set shell=zsh
-if exists('&undodir')
-	set undodir=~/.vim/undo,.
+" -----------------------------------------------------------------------------
+" vim css3 syntax
+" -----------------------------------------------------------------------------
+if has("autocmd")
+	autocmd!
+	autocmd FileType css setlocal iskeyword+=-
 endif
 
-" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
-if executable('ag')
-  " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
+" -----------------------------------------------------------------------------
+" auto commands
+" -----------------------------------------------------------------------------
+if has("autocmd")
+	autocmd!
 
-	" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g "'
+	" Turn on spell check for certain filetypes automatically
+	autocmd BufRead,BufNewFile *.md,*.markdown setlocal spell spelllang=en_us
+	autocmd BufRead,BufNewFile *.txt setlocal spell spelllang=en_us
+	autocmd FileType gitcommit setlocal spell spelllang=en_us
 
-	" ag is fast enough that CtrlP doesn't need to cache
-	let g:ctrlp_use_caching = 0
+	" Autowrap text to 80 chars for certain filetypes
+	autocmd BufRead,BufNewFile *.md,*.markdown setlocal textwidth=80
+	autocmd BufRead,BufNewFile *.txt setlocal textwidth=80
+	autocmd FileType gitcommit setlocal textwidth=80
 endif
+
+" -----------------------------------------------------------------------------
+" vim-javascript
+" -----------------------------------------------------------------------------
+let g:javascript_enable_domhtmlcss=1
+
+" -----------------------------------------------------------------------------
+" CtrlP
+" -----------------------------------------------------------------------------
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+
+" -----------------------------------------------------------------------------
+" footer
+" -----------------------------------------------------------------------------
+filetype plugin indent on
+syntax on
 
