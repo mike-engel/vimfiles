@@ -59,7 +59,7 @@ filetype plugin indent on    " required
 " -----------------------------------------------------------------------------
 " mappings
 " -----------------------------------------------------------------------------
-let mapleader=","
+let mapleader=" "
 
 " some remappings to edit vimrc
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
