@@ -103,6 +103,24 @@ nmap <S-Enter> O<Esc>
 nmap <CR> o<Esc>
 
 " -----------------------------------------------------------------------------
+" buffers
+" -----------------------------------------------------------------------------
+" open a new empty buffer
+nmap <leader>T :enew<cr>
+
+" move to the next buffer
+nmap <leader>l :bnext<CR>
+
+" move to the previous buffer
+nmap <leader>h :bprevious<CR>
+
+" close the current buffer and move to the previous one
+nmap <leader>bq :bp <BAR> bd #<CR>
+
+" show all open buffers and their status
+nmap <leader>b1 :ls<CR>
+
+" -----------------------------------------------------------------------------
 " colors
 " -----------------------------------------------------------------------------
 set t_Co=256
@@ -296,6 +314,8 @@ let g:airline_enable_branch=0
 let g:airline_enable_syntastic=0
 let g:airline#extensions#syntastic#enabled=0
 let g:airline_theme='base16'
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#fnamemod=':t'
 
 " -----------------------------------------------------------------------------
 " ultisnips config
