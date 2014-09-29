@@ -246,6 +246,9 @@ set nofoldenable
 set foldmethod=indent
 set foldnestmax=10
 
+" allow edited buffers that aren't visible in the window
+set hidden
+
 " -----------------------------------------------------------------------------
 " silver searcher
 " -----------------------------------------------------------------------------

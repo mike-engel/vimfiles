@@ -2,3 +2,5 @@
 Thumbs.db
 bundle/*
 !bundle/Vundle.vim
+.backups
+.tmp
