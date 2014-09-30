@@ -1,5 +1,5 @@
-set nocompatible " Use Vim settings rather than Vi
-filetype off " required for vundle
+set nocompatible
+filetype off
 filetype plugin indent off
 
 " set the runtime path to include Vundle and initialize
@@ -104,8 +104,15 @@ vnoremap . :normal .<CR>
 map <leader>= <c-W>=
 
 " easier newlines
-nmap <S-Enter> O<Esc>
+nmap <s-Enter> O<Esc>
 nmap <CR> o<Esc>
+
+" allow arrow keys to be used in insert mode
+imap ^[OA <Esc>ki
+imap ^[OB <Esc>ji
+imap ^[OC <Esc>li
+imap ^[OD <Esc>hi
+imap <Up> <Esc>ki
 
 " -----------------------------------------------------------------------------
 " buffers
@@ -123,7 +130,7 @@ nmap <leader>h :bprevious<CR>
 nmap <leader>bq :bp <BAR> bd #<CR>
 
 " show all open buffers and their status
-nmap <leader>b1 :ls<CR>
+nmap <leader>bl :ls<CR>
 
 " -----------------------------------------------------------------------------
 " colors
@@ -372,5 +379,6 @@ let g:ctrlp_working_path_mode = 'ra'
 " footer
 " -----------------------------------------------------------------------------
 filetype plugin indent on
+set nocompatible
 syntax on
 
