@@ -35,13 +35,18 @@ Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'gregsexton/MatchTag'
 
+Plugin 'othree/html5.vim'
+
 " CSS
 Plugin '1995eaton/vim-better-css-completion'
 Plugin 'hail2u/vim-css3-syntax'
+Bundle 'groenewege/vim-less'
 
 " JS
+Plugin 'pangloss/vim-javascript'
 Plugin '1995eaton/vim-better-javascript-completion'
 Plugin 'jelera/vim-javascript-syntax'
+Plugin 'briancollins/vim-jst'
 
 " Go
 Plugin 'fatih/vim-go'
@@ -353,6 +358,8 @@ endif
 " vim-javascript
 " -----------------------------------------------------------------------------
 let g:javascript_enable_domhtmlcss=1
+
+au BufNewFile,BufRead *.ejs set filetype=html
 
 " -----------------------------------------------------------------------------
 " CtrlP
