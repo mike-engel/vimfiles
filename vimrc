@@ -378,7 +378,7 @@ let g:ctrlp_working_path_mode = 'ra'
 " -----------------------------------------------------------------------------
 " footer
 " -----------------------------------------------------------------------------
-filetype plugin indent on
 set nocompatible
+filetype plugin indent on
 syntax on
 
