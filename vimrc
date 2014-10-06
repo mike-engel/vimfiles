@@ -35,6 +35,7 @@ Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'gregsexton/MatchTag'
 
+" HTML
 Plugin 'othree/html5.vim'
 
 " CSS
@@ -106,13 +107,6 @@ map <leader>= <c-W>=
 " easier newlines
 nmap <s-Enter> O<Esc>
 nmap <CR> o<Esc>
-
-" allow arrow keys to be used in insert mode
-imap ^[OA <Esc>ki
-imap ^[OB <Esc>ji
-imap ^[OC <Esc>li
-imap ^[OD <Esc>hi
-imap <Up> <Esc>ki
 
 " -----------------------------------------------------------------------------
 " buffers
