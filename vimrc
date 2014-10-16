@@ -18,7 +18,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'bling/vim-airline'
 Plugin 'airblade/vim-gitgutter'
 " Plugin 'zhaocai/GoldenView.Vim'
-Plugin 'terryma/vim-multiple-cursors'
+Plugin 'kristijanhusak/vim-multiple-cursors'
 
 " General
 Plugin 'kien/ctrlp.vim'
