@@ -1,6 +1,5 @@
 set nocompatible
 filetype off
-filetype plugin indent off
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -41,7 +40,7 @@ Plugin 'othree/html5.vim'
 " CSS
 Plugin '1995eaton/vim-better-css-completion'
 Plugin 'hail2u/vim-css3-syntax'
-Bundle 'groenewege/vim-less'
+Plugin 'groenewege/vim-less'
 
 " JS
 Plugin 'pangloss/vim-javascript'
@@ -259,10 +258,10 @@ set directory=~/.vim/.tmp
 
 " better undos
 if has('persistent_undo')
-	set undofile
-	set undodir=~/.vim/.undo
-	set undolevels=200
-	set undoreload=200
+    set undofile
+    set undodir=~/.vim/.undo
+    set undolevels=200
+    set undoreload=200
 endif
 
 " code folding
@@ -277,39 +276,17 @@ set hidden
 " silver searcher
 " -----------------------------------------------------------------------------
 if executable('ag')
-	" Use Ag over Grep
-	set grepprg=ag\ --nogroup\ --nocolor
+    " Use Ag over Grep
+    set grepprg=ag\ --nogroup\ --nocolor
 
-	" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-	let g:ctrlp_user_command = 'ag %s -l --nocolor -g "'
+    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g "'
 
-	" ag is fast enough that CtrlP doesn't need to cache
-	let g:ctrlp_use_caching = 0
+    " ag is fast enough that CtrlP doesn't need to cache
+    let g:ctrlp_use_caching = 0
 
-	" better ack shortcut
-	nnoremap <leader>f :Ag!<space>-i<space>-Q<space>
-endif
-
-" -----------------------------------------------------------------------------
-" NERDTree config
-" -----------------------------------------------------------------------------
-let NERDTreeIgnore=['\.rbc$', '\~$', '\.dSYM$', '\.DS_Store']
-let NERDTreeMinimalUI=1
-let NERDTreeDirArrows=1
-let NERDTreeChDirMode=1
-let NERDTreeMouseMode=1
-let NERDTreeShowHidden=1
-
-map <leader>n :NERDTreeToggle<CR>
-
-if has("autocmd")
-    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-endif
-
-if isdirectory(argv(0))
-    bd
-    autocmd vimenter * exe "cd" argv(0)
-    autocmd VimEnter * NERDTree
+    " better ack shortcut
+    nnoremap <leader>f :Ag!<space>-i<space>-Q<space>
 endif
 
 " -----------------------------------------------------------------------------
@@ -333,26 +310,27 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " -----------------------------------------------------------------------------
 " vim css3 syntax
 " -----------------------------------------------------------------------------
-if has("autocmd")
-	autocmd!
-	autocmd FileType css setlocal iskeyword+=-
-endif
+augroup VimCSS3Syntax
+    autocmd!
+
+    autocmd FileType css setlocal iskeyword+=-
+augroup END
 
 " -----------------------------------------------------------------------------
 " auto commands
 " -----------------------------------------------------------------------------
 if has("autocmd")
-	autocmd!
+    autocmd!
 
-	" Turn on spell check for certain filetypes automatically
-	autocmd BufRead,BufNewFile *.md,*.markdown setlocal spell spelllang=en_us
-	autocmd BufRead,BufNewFile *.txt setlocal spell spelllang=en_us
-	autocmd FileType gitcommit setlocal spell spelllang=en_us
+    " Turn on spell check for certain filetypes automatically
+    autocmd BufRead,BufNewFile *.md,*.markdown setlocal spell spelllang=en_us
+    autocmd BufRead,BufNewFile *.txt setlocal spell spelllang=en_us
+    autocmd FileType gitcommit setlocal spell spelllang=en_us
 
-	" Autowrap text to 80 chars for certain filetypes
-	autocmd BufRead,BufNewFile *.md,*.markdown setlocal textwidth=80
-	autocmd BufRead,BufNewFile *.txt setlocal textwidth=80
-	autocmd FileType gitcommit setlocal textwidth=80
+    " Autowrap text to 80 chars for certain filetypes
+    autocmd BufRead,BufNewFile *.md,*.markdown setlocal textwidth=80
+    autocmd BufRead,BufNewFile *.txt setlocal textwidth=80
+    autocmd FileType gitcommit setlocal textwidth=80
 endif
 
 " -----------------------------------------------------------------------------
@@ -373,6 +351,5 @@ let g:ctrlp_working_path_mode = 'ra'
 " footer
 " -----------------------------------------------------------------------------
 set nocompatible
-filetype plugin indent on
 syntax on
 
