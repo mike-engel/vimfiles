@@ -317,23 +317,6 @@ augroup VimCSS3Syntax
 augroup END
 
 " -----------------------------------------------------------------------------
-" auto commands
-" -----------------------------------------------------------------------------
-if has("autocmd")
-    autocmd!
-
-    " Turn on spell check for certain filetypes automatically
-    autocmd BufRead,BufNewFile *.md,*.markdown setlocal spell spelllang=en_us
-    autocmd BufRead,BufNewFile *.txt setlocal spell spelllang=en_us
-    autocmd FileType gitcommit setlocal spell spelllang=en_us
-
-    " Autowrap text to 80 chars for certain filetypes
-    autocmd BufRead,BufNewFile *.md,*.markdown setlocal textwidth=80
-    autocmd BufRead,BufNewFile *.txt setlocal textwidth=80
-    autocmd FileType gitcommit setlocal textwidth=80
-endif
-
-" -----------------------------------------------------------------------------
 " vim-javascript
 " -----------------------------------------------------------------------------
 let g:javascript_enable_domhtmlcss=1
