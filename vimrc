@@ -16,7 +16,6 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'bling/vim-airline'
 Plugin 'airblade/vim-gitgutter'
-" Plugin 'zhaocai/GoldenView.Vim'
 Plugin 'kristijanhusak/vim-multiple-cursors'
 
 " General
@@ -24,6 +23,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'danro/rename.vim'
 Plugin 'pbrisbin/vim-mkdir'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'vim-scripts/PreserveNoEOL'
 
 " Typing
 Plugin 'Raimondi/delimitMate'
@@ -125,6 +125,9 @@ nmap <leader>bq :bp <BAR> bd #<CR>
 " show all open buffers and their status
 nmap <leader>bl :ls<CR>
 
+" close the last buffer and display an empty buffer
+nmap <leader>bw :silent! bp<BAR>sp<BAR>silent! bn<BAR>bd<CR>
+
 " -----------------------------------------------------------------------------
 " colors
 " -----------------------------------------------------------------------------
@@ -182,6 +185,9 @@ set showmatch
 " highlight bad whitespace
 set list
 set listchars=tab:›\ ,trail:•,extends:>,nbsp:.
+
+" Preserve EOL at the end of a file
+let g:PreserveNoEOL = 1
 
 " -----------------------------------------------------------------------------
 " searching
@@ -340,4 +346,3 @@ set rtp+=$GOROOT/misc/vim
 " -----------------------------------------------------------------------------
 set nocompatible
 syntax on
-
