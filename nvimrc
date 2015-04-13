@@ -254,7 +254,6 @@ set showmatch
 " os x backspace fix
 set backspace=indent,eol,start
 set modelines=0
-fixdel
 
 " backups
 set noswapfile
