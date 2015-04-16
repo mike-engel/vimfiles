@@ -4,3 +4,4 @@ bundle/*
 !bundle/Vundle.vim
 .backups
 .tmp
+.undo

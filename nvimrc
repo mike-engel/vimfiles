@@ -248,6 +248,11 @@ set shell=zsh
 set ttimeout
 set ttimeoutlen=500
 
+if has('nvim')
+    set ttimeout
+    set ttimeoutlen=0
+endif
+
 " match brackets
 set showmatch
 
