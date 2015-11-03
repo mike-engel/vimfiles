@@ -109,6 +109,7 @@ set smartindent
 set showmatch
 set list
 set listchars=tab:›\ ,trail:•,extends:>,nbsp:. " Highlight bad whitespace
+set nopaste
 let g:PreserveNoEOL=1 " Preserve new line at end of file
 
 ""
