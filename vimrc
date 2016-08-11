@@ -25,7 +25,7 @@ Plugin 'editorconfig/editorconfig-vim'
 " HTML5
 Plugin 'othree/html5.vim'
 
-" JS 
+" JS
 Plugin 'jelera/vim-javascript-syntax'
 
 " CSS
@@ -43,17 +43,15 @@ filetype plugin indent on
 
 ""
 "" Mappings
-"" 
+""
 let mapleader=" "
-
-" remove whitespace on save
-nnoremap <leader>W :%s/\s\+$//<CR>:let @/=''<CR>
 
 ""
 "" Colors
 ""
 set t_Co=256
 set background=dark
+set termguicolors
 colorscheme base16-ocean
 
 ""
@@ -64,8 +62,6 @@ set ruler " add a ruler to the bottom right
 set laststatus=2
 set showmode
 set cursorline
-highlight clear SignColumn
-highlight clear LineNrlet
 set whichwrap=h,l,~,[,]
 
 ""
@@ -83,7 +79,9 @@ set smartindent
 set showmatch
 set list
 set listchars=tab:›\ ,trail:•,extends:>,nbsp:. " Highlight bad whitespace
+set nofoldenable " Don't fold shit because it's the worst -mrmrs
 let g:PreserveNoEOL=1 " Preserve new line at end of file
+autocmd BufWritePre * :call StripTrailingWhitespace()
 
 ""
 "" Searching
@@ -122,6 +120,8 @@ fixdel
 ""
 set noswapfile
 set backup
+silent execute '!mkdir -p ~/.vim/.backups'
+silent execute '!mkdir -p ~/.vim/.tmp'
 set backupdir=~/.vim/.backups
 set directory=~/.vim/.tmp
 
@@ -130,6 +130,7 @@ set directory=~/.vim/.tmp
 ""
 if has('persistent_undo')
   set undofile
+  silent execute '!mkdir -p ~/.vim/.undo'
   set undodir=~/.vim/.undo
   set undolevels=200
   set undoreload=200
@@ -137,6 +138,7 @@ endif
 
 ""
 "" Silver Searcher (Ag)
+""
 if executable('ag')
   " Use Ag over Grep
   set grepprg=ag\ --nogroup\ --nocolor
@@ -180,6 +182,18 @@ au BufNewFile,BufRead *.ejs set filetype=html
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
+
+""
+"" Helper functions
+""
+fun! StripTrailingWhitespace()
+  " don't strip on these filetypes
+  if &ft =~ 'modula2\|markdown'
+    return
+  endif
+
+  %s/\s\+$//e
+endfun
 
 ""
 "" Wrapup
