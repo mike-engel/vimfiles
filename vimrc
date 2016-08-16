@@ -10,17 +10,22 @@ Plugin 'gmarik/Vundle.vim'
 " Typing
 " Changing surrounding quotes
 Plugin 'tpope/vim-surround'
+Plugin 'Raimondi/delimitMate'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'vim-scripts/tComment'
 
 " Meta
-" Fuzzy file finding
+Plugin 'bling/vim-airline'
 Plugin 'kien/ctrlp.vim'
-" The silver searcher
 Plugin 'rking/ag.vim'
-" Git shortcuts for vim
 Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'danro/rename.vim'
 
 " Code quality
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'vim-scripts/PreserveNoEOL'
+Plugin 'scrooloose/syntastic'
 
 " HTML5
 Plugin 'othree/html5.vim'
@@ -45,6 +50,27 @@ filetype plugin indent on
 "" Mappings
 ""
 let mapleader=" "
+
+""
+"" Buffers
+""
+" open a new empty buffer
+nmap <leader>T :enew<cr>
+
+" move to the next buffer
+nmap <leader>l :bnext<cr>
+
+" move to the previous buffer
+nmap <leader>h :brevious<cr>
+
+" close the current buffer and move to the previous one
+nmap <leader>bq :bp <BAR> bd #<cr>
+
+" show all open buffers and their status
+nmap <leader>bl :ls<cr>
+
+" close the last buffer and display an empty buffer
+nmap <leader>bw :silent! bp<BAR>sp<BAR>silent! bn<BAR>bd<cr>
 
 ""
 "" Colors
@@ -79,7 +105,8 @@ set smartindent
 set showmatch
 set list
 set listchars=tab:›\ ,trail:•,extends:>,nbsp:. " Highlight bad whitespace
-set nofoldenable " Don't fold shit because it's the worst -mrmrs
+set nofoldenable
+set nopaste
 let g:PreserveNoEOL=1 " Preserve new line at end of file
 autocmd BufWritePre * :call StripTrailingWhitespace()
 
@@ -113,6 +140,7 @@ set shell=bash
 set hidden
 set backspace=indent,eol,start
 set modelines=0
+set nofoldenable
 fixdel
 
 ""
@@ -157,8 +185,8 @@ endif
 "" Airline config
 ""
 let g:airline_powerline_fonts=1
-let g:airline_enable_branch=0
 let g:airline_theme='base16'
+let g:airline#extensions#branch#enabled=1
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#fnamemod=':t'
 
