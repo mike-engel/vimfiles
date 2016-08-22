@@ -25,7 +25,7 @@ Plugin 'editorconfig/editorconfig-vim'
 " HTML5
 Plugin 'othree/html5.vim'
 
-" JS 
+" JS
 Plugin 'jelera/vim-javascript-syntax'
 
 " CSS
@@ -43,7 +43,7 @@ filetype plugin indent on
 
 ""
 "" Mappings
-"" 
+""
 let mapleader=" "
 
 " remove whitespace on save
@@ -64,8 +64,6 @@ set ruler " add a ruler to the bottom right
 set laststatus=2
 set showmode
 set cursorline
-highlight clear SignColumn
-highlight clear LineNrlet
 set whichwrap=h,l,~,[,]
 
 ""
@@ -83,7 +81,9 @@ set smartindent
 set showmatch
 set list
 set listchars=tab:›\ ,trail:•,extends:>,nbsp:. " Highlight bad whitespace
+set nofoldenable
 let g:PreserveNoEOL=1 " Preserve new line at end of file
+autocmd BufWritePre * :call StripTrailingWhitespace()
 
 ""
 "" Searching
@@ -115,7 +115,6 @@ set shell=bash
 set hidden
 set backspace=indent,eol,start
 set modelines=0
-fixdel
 
 ""
 "" Backups
@@ -189,6 +188,18 @@ if has('nvim')
   set ttimeout
   set ttimeoutlen=0
 endif
+
+""
+"" Helper functions
+""
+fun! StripTrailingWhitespace()
+  " don't strip on these filetypes
+  if &ft =~ 'modula2\|markdown'
+    return
+  endif
+
+  %s/\s\+$//e
+endfun
 
 ""
 "" Wrapup
