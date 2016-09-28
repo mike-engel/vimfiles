@@ -42,6 +42,7 @@ Plugin 'plasticboy/vim-markdown.git'
 
 " Theme
 Bundle 'chriskempson/base16-vim'
+Bundle 'vim-airline/vim-airline-themes'
 
 call vundle#end()
 filetype plugin indent on
