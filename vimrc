@@ -73,6 +73,9 @@ nmap <leader>bl :ls<cr>
 " close the last buffer and display an empty buffer
 nmap <leader>bw :silent! bp<BAR>sp<BAR>silent! bn<BAR>bd<cr>
 
+" prevent the stupid q: window from opening
+nmap q: :q
+
 ""
 "" Colors
 ""
