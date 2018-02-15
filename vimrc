@@ -15,17 +15,19 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'vim-scripts/tComment'
 
 " Meta
+Plugin 'wincent/terminus'
 Plugin 'bling/vim-airline'
 Plugin 'kien/ctrlp.vim'
 Plugin 'rking/ag.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'danro/rename.vim'
+Plugin 'easymotion/vim-easymotion'
 
 " Code quality
-Plugin 'editorconfig/editorconfig-vim'
 Plugin 'vim-scripts/PreserveNoEOL'
 Plugin 'scrooloose/syntastic'
+Plugin 'prettier/vim-prettier'
 
 " HTML5
 Plugin 'othree/html5.vim'
@@ -35,7 +37,6 @@ Plugin 'jelera/vim-javascript-syntax'
 
 " CSS
 Plugin 'hail2u/vim-css3-syntax'
-Plugin 'groenewege/vim-less'
 
 " Markdown
 Plugin 'plasticboy/vim-markdown.git'
@@ -51,7 +52,8 @@ filetype plugin indent on
 "" Mappings
 ""
 let mapleader=" "
-
+vnoremap < <gv
+vnoremap > >gv
 ""
 "" Buffers
 ""
@@ -81,7 +83,7 @@ nmap q: :q
 ""
 set t_Co=256
 set background=dark
-set termguicolors
+"" set termguicolors "" disable because hyper/xterm3 doesn't support truecolor
 colorscheme base16-ocean
 
 ""
@@ -92,6 +94,7 @@ set ruler " add a ruler to the bottom right
 set laststatus=2
 set showmode
 set cursorline
+set cursorcolumn
 set whichwrap=h,l,~,[,]
 
 ""
@@ -108,7 +111,7 @@ set autoindent
 set smartindent
 set showmatch
 set list
-set listchars=tab:›\ ,trail:•,extends:>,nbsp:. " Highlight bad whitespace
+set listchars=tab:>-,trail:·
 set nofoldenable
 set nopaste
 let g:PreserveNoEOL=1 " Preserve new line at end of file
