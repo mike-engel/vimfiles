@@ -83,8 +83,11 @@ nmap q: :q
 ""
 set t_Co=256
 set background=dark
-"" set termguicolors "" disable because hyper/xterm3 doesn't support truecolor
-colorscheme base16-ocean
+"" colorscheme base16-ocean
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
 
 ""
 "" GUI
